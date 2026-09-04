@@ -1,0 +1,44 @@
+﻿@model Online_Car_Marketplace.Models.Car
+
+<h2>Car Details</h2>
+
+<div>
+    <label>Make:</label> @Model.Make
+</div>
+<div>
+    <label>Model:</label> @Model.Model
+</div>
+<div>
+    <label>Year:</label> @Model.year
+</div>
+<div>
+    <label>Price:</label> @Model.price
+</div>
+<div>
+    <label>Mileage:</label> @Model.Mileage
+</div>
+<div>
+    <label>Description:</label> @Model.Description
+</div>
+<div>
+    <label>City:</label> @Model.City
+</div>
+<div>
+    <label>Active:</label> @(Model.IsActive ? "Yes" : "No")
+</div>
+<div>
+    <label>Image:</label><br />
+    @if (!string.IsNullOrEmpty(Model.ImagePath))
+    {
+        <img src="~/images/cars/@Model.ImagePath" width="300" />
+    }
+    else
+    {
+        <span>No Image</span>
+    }
+</div>
+
+<div class="mt-2">
+    @* <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | *@
+    <a asp-action="Index">Back to List</a>
+</div>

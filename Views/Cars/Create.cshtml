@@ -1,0 +1,54 @@
+﻿@model Online_Car_Marketplace.Models.Car
+
+<h1>Create Car</h1>
+
+<form asp-action="Create" enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Make"></label>
+        <input asp-for="Make" placeholder="Brand of car" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Model"></label>
+        <input asp-for="Model" placeholder="Car Model" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="year"></label>
+        <input asp-for="year" placeholder="1990-2100" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Mileage"></label>
+        <input asp-for="Mileage" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="price"></label>
+        <input asp-for="price" required="ki" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" placeholder="Car Description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" placeholder="Car in which city" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Car Image</label>
+        <input type="file" name="CarImageFile" class="form-control" />
+    </div>
+
+    <div class="form-group form-check">
+        <input asp-for="IsActive" class="form-check-input" />
+        <label asp-for="IsActive" class="form-check-label">Active</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Online_Car_Marketplace.Models.Car>
+
+<h1>Cars List</h1>
+<!-- Search Form -->
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" name="searchMake" class="form-control" placeholder="Search by Make" />
+        </div>
+        <div class="col-md-4">
+            <input type="text" name="searchCity" class="form-control" placeholder="Search by City" />
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a asp-action="Index" class="btn btn-secondary">Reset</a>
+        </div>
+    </div>
+</form>
+@using Microsoft.AspNetCore.Http
+
+@{
+    var role = Context.Request.HttpContext.Session.GetString("Role");
+}
+
+   @if (role == "Admin")
+    {
+        <p><a class="btn btn-success" asp-action="Create">Create New Car</a></p>
+    }
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <@* th>Make</th> *@
+            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["MakeSortParm"]">Make</a> </th>
+            <th>Model</th>
+            @* <th>Year</th> *@
+            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParm"]">Year</a></th>  
+            <th>Mileage</th>
+           @*  <th>Price</th> *@
+            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">Price</a> </th>
+            <th>Description</th>
+            <th>City</th>
+            <th>Active</th>
+            @* <th>Created</th> *@
+            <th> <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Created</a> </th>
+            <th>Updated</th>
+            <th>Actions</th>
+            
+           
+            
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(car.ImagePath))
+                    {
+                        <img src="~/images/cars/@car.ImagePath" width="100" />
+                    }
+                </td>
+                <td>@car.Make</td>
+                <td>@car.Model</td>
+                <td>@car.year</td>
+                <td>@car.Mileage</td>
+                <td>@car.price</td>
+                <td>@car.Description</td>
+                <td>@car.City</td>
+                <td>@car.IsActive</td>
+                <td>@car.CreatedAt</td>
+                <td>@car.UpdatedAt</td>
+                <td>
+                    @if (role == "Admin")
+                    {
+                        <a asp-action="Edit" asp-route-id="@car.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@car.Id" class="btn btn-danger btn-sm">Delete</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-info btn-sm">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
